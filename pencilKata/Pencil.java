@@ -11,6 +11,7 @@ public class Pencil {
 	
 	public Pencil(int instLeadDurability) {
 		leadDurability = instLeadDurability;
+		
 	}
 	
 	public String write(String paper, String writing) {
@@ -54,7 +55,12 @@ public class Pencil {
 			for (int i = 0; i<stringToErase.length(); i++) {
 				whitespace+=" ";
 			}
-			paper = paper.replace(stringToErase, whitespace);
+			int beginningOfLastInstance = paper.lastIndexOf(stringToErase);
+			String newPaper = "";
+			newPaper = paper.substring(0, beginningOfLastInstance);
+			newPaper = newPaper.concat(whitespace);
+			newPaper = newPaper.concat(paper.substring(beginningOfLastInstance+whitespace.length()));
+			return newPaper;
 		}
 		return paper;
 	}
