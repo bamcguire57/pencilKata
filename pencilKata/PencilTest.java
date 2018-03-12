@@ -29,4 +29,11 @@ class PencilTest {
 		pencil3 = pencil3.sharpenPencil(pencil3);
 		assertEquals(pencil3.leadDurability, 500);
 	}
+	
+	@Test
+	void testSharpenPencilWithProvidedValue() {
+		Pencil pencil3 = new Pencil(60);
+		pencil3 = pencil3.sharpenPencil(pencil3, 400);
+		assertEquals(pencil3.leadDurability, 400);
+	}
 }

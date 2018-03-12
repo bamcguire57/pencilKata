@@ -41,4 +41,10 @@ public class Pencil {
 		pencil.leadDurability = leadDefault;
 		return pencil;
 	}
+	
+	public Pencil sharpenPencil(Pencil pencil, int newLeadDurability) {
+		//If you're not one for overloading functions, this could easily be a ternary checking the length of the parameter before using it and using the default if the passed int is null.
+		pencil.leadDurability = newLeadDurability;
+		return pencil;
+	}
 }
