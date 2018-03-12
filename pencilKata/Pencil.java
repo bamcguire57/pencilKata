@@ -13,6 +13,10 @@ public class Pencil {
 		leadDurability = instLeadDurability;
 	}
 	
+	public String write(String paper, String writing) {
+		return paper+=writing;
+	}
+	
 	public String write(Pencil pencil, String paper, String writing) {
 		for (int i = 0; i<writing.length(); i++) {
 			char character = writing.charAt(i);
