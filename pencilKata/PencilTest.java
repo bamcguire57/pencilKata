@@ -32,8 +32,15 @@ class PencilTest {
 	
 	@Test
 	void testSharpenPencilWithProvidedValue() {
-		Pencil pencil3 = new Pencil(60);
-		pencil3 = pencil3.sharpenPencil(pencil3, 400);
-		assertEquals(pencil3.leadDurability, 400);
+		Pencil pencil4 = new Pencil(60);
+		pencil4 = pencil4.sharpenPencil(pencil4, 400);
+		assertEquals(pencil4.leadDurability, 400);
+	}
+	
+	@Test
+	void testErase() {
+		paper = pencil.write(pencil, paper, "this is a test.");
+		paper = pencil.erase(paper, "test");
+		assertEquals("this is a     .", paper);
 	}
 }

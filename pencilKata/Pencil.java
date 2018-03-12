@@ -47,4 +47,15 @@ public class Pencil {
 		pencil.leadDurability = newLeadDurability;
 		return pencil;
 	}
+	
+	public String erase(String paper, String stringToErase) {
+		if (paper.contains(stringToErase)) {
+			String whitespace = "";
+			for (int i = 0; i<stringToErase.length(); i++) {
+				whitespace+=" ";
+			}
+			paper = paper.replace(stringToErase, whitespace);
+		}
+		return paper;
+	}
 }
