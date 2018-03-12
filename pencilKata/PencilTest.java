@@ -11,8 +11,9 @@ class PencilTest {
 	
 	@Test
 	void testWrite() {
-		paper = pencil.write(paper, "this is a test.");
-		assertEquals("this is a test.", paper);
+		Pencil pencil2 = new Pencil(25);
+		paper = pencil2.write(pencil2, paper, "This is a test. TestING 123! I'm going to run out of lead.");
+		assertEquals("This is a test. TestING ", paper);
 	}
 
 }
