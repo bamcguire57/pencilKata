@@ -22,4 +22,11 @@ class PencilTest {
 		paper = pencil2.write(pencil2, paper, "This is a test. TestING 123! I'm going to run out of lead.");
 		assertEquals("This is a test. TestING ", paper);
 	}
+	
+	@Test
+	void testSharpenPencil() {
+		Pencil pencil3 = new Pencil(40);
+		pencil3 = pencil3.sharpenPencil(pencil3);
+		assertEquals(pencil3.leadDurability, 500);
+	}
 }

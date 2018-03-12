@@ -36,4 +36,9 @@ public class Pencil {
 		}
 		return paper;
 	}
+
+	public Pencil sharpenPencil(Pencil pencil) {
+		pencil.leadDurability = leadDefault;
+		return pencil;
+	}
 }
