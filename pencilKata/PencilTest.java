@@ -51,4 +51,22 @@ class PencilTest {
 		paper = pencil.erase(paper, "test");
 		assertEquals("this is a test.          tes", paper);
 	}
+	
+	@Test
+	void testEraseUsingDegradation() {
+		Pencil pencil = new Pencil(500, 5);
+		paper = pencil.write(pencil, paper, "this is a test. this is a test. this is a test.");
+		paper = pencil.erase(pencil, paper, "test. th");
+		assertEquals("this is a test. this is a te      is is a test.", paper);
+	}
+	
+	@Test
+	void testEraseUsingDegradationAndMultipleInstancesOfTheSameWord() {
+		Pencil pencil = new Pencil(500, 10);
+		paper = pencil.write(pencil, paper, "this is a test. this is a test. this is a test.");
+		paper = pencil.erase(pencil, paper, "test. th");
+		assertEquals("this is a test. this is a         is is a test.", paper);
+		paper = pencil.erase(pencil, paper, "test. th");
+		assertEquals("this is a test    is is a         is is a test.", paper);
+	}
 }
