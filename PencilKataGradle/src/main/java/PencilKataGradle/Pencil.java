@@ -36,7 +36,7 @@ public class Pencil {
 	}
 
 	public void sharpen() {
-		this.leadDurability = LEAD_DEFAULT;
+		this.sharpen(LEAD_DEFAULT);
 	}
 	
 	public void sharpen(int newLeadDurability) {
@@ -64,35 +64,33 @@ public class Pencil {
 	}
 	
 	public String erase(String paper, String stringToErase) {
-		if (paper.contains(stringToErase)) {
-			String oldString = stringToErase;
-			int eraserRequired = stringToErase.replace(" ", "").length();
-			if (this.eraserDurability >= eraserRequired) {
-				this.eraserDurability-=eraserRequired;
-			} else {
-				stringToErase = "";
-				for (int i = oldString.length()-1; i>=0 && this.eraserDurability>0; i--) {
-					char currentChar = oldString.charAt(i);
-					stringToErase = currentChar + stringToErase;
-					if (!Character.isWhitespace(currentChar)) {
-						this.eraserDurability--;
-					}
+		return paper.contains(stringToErase) ? getNewPaper(paper, stringToErase, getErasableString(stringToErase)) : paper;
+	}
+
+	private String getNewPaper(String paper, String stringToErase, String erasableString) {
+		String whitespace = " ".repeat(erasableString.length());
+		int beginningOfLastInstance = paper.lastIndexOf(stringToErase);
+		beginningOfLastInstance += stringToErase.length() - whitespace.length();
+		String charsBeforeErasedSection = paper.substring(0, beginningOfLastInstance);
+		String charsAfterErasedSection = paper.substring(beginningOfLastInstance+whitespace.length());
+		return new String(charsBeforeErasedSection + whitespace + charsAfterErasedSection);
+	}
+
+	private String getErasableString(String oldString) {
+		String erasableString = "";
+		int eraserRequired = oldString.replace(" ", "").length();
+		if (this.eraserDurability >= eraserRequired) {
+			erasableString = new String(oldString);
+			this.eraserDurability -= eraserRequired;
+		} else {
+			for (int i = oldString.length()-1; i>=0 && this.eraserDurability>0; i--) {
+				char currentChar = oldString.charAt(i);
+				erasableString = currentChar + erasableString;
+				if (!Character.isWhitespace(currentChar)) {
+					this.eraserDurability--;
 				}
 			}
-			String whitespace = "";
-			for (int i = 0; i<stringToErase.length(); i++) {
-				whitespace+=" ";
-			}
-			//Look for old string
-			int beginningOfLastInstance = paper.lastIndexOf(oldString);
-			//But make sure you're replacing the right part
-			beginningOfLastInstance+=oldString.length()-whitespace.length();
-			String newPaper = "";
-			newPaper = paper.substring(0, beginningOfLastInstance);
-			newPaper = newPaper.concat(whitespace);
-			newPaper = newPaper.concat(paper.substring(beginningOfLastInstance+whitespace.length()));
-			paper = newPaper;
 		}
-		return paper;
+		return erasableString;
 	}
 }

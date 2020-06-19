@@ -19,7 +19,6 @@ public class PencilTest {
 	public void testLeadDegredation() {
 		Pencil pencil = new Pencil(25);
 		paper = pencil.write(paper, "This is a test. TestING 123! I'm going to run out of lead.");
-		System.out.print(paper);
 		assertEquals("This is a test. TestING ", paper);
 	}
 	
